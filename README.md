@@ -1,24 +1,10 @@
-# trustana
+# simple vue js + element ui 
 
-## Project setup
-```
-yarn install
-```
+this is the frontend application for a full stack exercise.
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+step 1: clone the project https://github.com/jerry81/trustanaKoaJs
+step 2: run the above project following the readme (prerequisites are node and nodejs and mongo server)
+step 3: yarn
+step 4: yarn serve
+step 5: open a chrome browser with --disable-web-security flag or safari browser with cross-origin checks disabled and browse to localhost:8080
 
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
