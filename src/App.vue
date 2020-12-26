@@ -1,12 +1,19 @@
 <template>
   <div id="app">
-    <profile :profile="response[0]"/>
+    <profile :profile="firstUser"/>
     <el-button 
       class="button" 
       type="primary" 
       @click="edit"
     >Edit Info/编辑</el-button>
+    <el-button 
+      v-if="!response.length"
+      class="button" 
+      type="primary" 
+      @click="create"
+    >Create User/添加信息</el-button>
     <edit-profile 
+      v-if="response.length"
       :visible="editing" 
       :form="edited"
       @cancel="editing=false"
@@ -26,23 +33,42 @@ export default {
   },
   data: () => {
     return {
-      response: [{}],
+      response: [],
       editing: false,
       edited: {}
     }
   },
+  computed: {
+    firstUser() {
+      return this.response?.length ? this.response[0] : {}
+    }
+  },
   async created() {
-    const {data} = await this.$api.user.getUsers()
-    this.response = data
+    await this.refresh()
   },
   methods: {
-    edit() {
-      this.editing = true
-      this.edited = { ...this.response[0] }
+    async refresh() {
+      const {data} = await this.$api.user.findAll()
+      this.response = data
     },
-    commit(result) {
-      console.log('do the save now ', result)
+    edit() {
+      this.edited = { ...this.firstUser }
+      this.editing = true
+    },
+    async commit(result) {
       this.editing = false
+      if (this.response.length) {
+        const {data} = await this.$api.user.edit(result)
+        console.log('user edited', data)
+      } else {
+        const {data} = await this.$api.user.create(result)
+        console.log('user created', data)
+      }
+      this.refresh()
+    },
+    async create() {
+      this.edited = {}
+      this.editing = true
     }
   }
 }
