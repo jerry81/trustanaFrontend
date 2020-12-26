@@ -10,5 +10,15 @@ export default {
     },
     async create(user) {
         return await axios.post(`user`, user, getConfig())
-    }
+    },
+    async upload(file) {
+    
+        let formData = new FormData()
+      
+        formData.set('file', file)
+      
+        return await axios.post(`uploadResume`, formData, getConfig(
+            'multipart/form-data',
+          ))
+      }
 }

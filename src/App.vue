@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <profile :profile="firstUser"/>
+    <profile :profile="firstUser" :hasResume="hasResume"/>
     <el-button 
       class="button" 
       type="primary" 
@@ -39,6 +39,9 @@ export default {
     }
   },
   computed: {
+    hasResume() {
+      return this.firstUser?.resumeId ? 'yes': 'no'
+    },
     firstUser() {
       return this.response?.length ? this.response[0] : {}
     }
