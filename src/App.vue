@@ -2,6 +2,7 @@
   <div id="app">
     <profile :profile="firstUser" :hasResume="hasResume"/>
     <el-button 
+      v-if="response.length"
       class="button" 
       type="primary" 
       @click="edit"
@@ -13,7 +14,6 @@
       @click="create"
     >Create User/添加信息</el-button>
     <edit-profile 
-      v-if="response.length"
       :visible="editing" 
       :form="edited"
       @cancel="editing=false"
@@ -40,7 +40,7 @@ export default {
   },
   computed: {
     hasResume() {
-      return this.firstUser?.resumeId ? 'yes': 'no'
+      return this.firstUser?.resumeName || 'Not yet uploaded 尚未上传'
     },
     firstUser() {
       return this.response?.length ? this.response[0] : {}

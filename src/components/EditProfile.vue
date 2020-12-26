@@ -11,6 +11,10 @@
       <el-form-item label="Email/邮箱">
         <el-input v-model="form.email"></el-input>
       </el-form-item>
+      <el-form-item label="Uploaded Resume/已保存简历">
+        <span>{{form.resumeName || 'not yet uploaded'}}</span>
+        <a href="" v-if="form.resumeName" @click.stop.prevent="downloadResume" style="margin-left: 15px;">Download/下载</a>
+      </el-form-item>
       <el-form-item label="Upload Resume/上传简历">
         <el-upload class="upload-demo"
           action = ""
@@ -58,8 +62,14 @@ export default {
     },
     async onUploadNowClick() {
       const res = await this.$api.user.upload(this.file)
-      const id = res?.data?.insertedId
-      this.form.resumeId = id
+      const data = res?.data
+      console.log('data is ', data)
+      const { name, insertedId } = data
+      console.log('yep', name)
+      this.form.resumeId = insertedId
+      this.form.resumeName = name
+      this.file = null
+      
       this.$message('resume uploaded successfuly')
     },
     handleChange(e) {
@@ -69,6 +79,12 @@ export default {
     },
     handleRemove() {
       console.log('args for remove is ', arguments)
+    },
+    async downloadResume() {
+      const {data} = await this.$api.user.dl(this.form.resumeId, this.form.resumeName)
+      console.log('data is ', data)
+      var url  = window.URL.createObjectURL(data);
+      window.location.assign(url);
     }
   }
 }

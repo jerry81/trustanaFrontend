@@ -8,7 +8,7 @@
         <span>Email/邮箱: </span><span>{{profile.email}}</span>
     </div>
     <div>
-        <span>Resume Uploaded/已上传简历?: </span><span>{{hasResume}}</span>
+        <span>Resume Filename/简历文件名: </span><span>{{hasResume}}</span>
     </div>
   </div>
 </template>
@@ -24,7 +24,7 @@ export default {
     },
     hasResume: {
         type: String,
-        default: 'no'
+        default: 'None uploaded yet/尚未上传'
     }
   },
 }

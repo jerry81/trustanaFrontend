@@ -19,6 +19,18 @@ export default {
       
         return await axios.post(`uploadResume`, formData, getConfig(
             'multipart/form-data',
-          ))
-      }
+        ))
+    },
+    async dl(id, fileName) {
+        return await axios({
+            url: `downloadResume/${id}/${fileName}`,
+            method: 'GET',
+            responseType: 'blob',
+            headers: {
+              'Access-Control-Allow-Origin': '*',
+            }})
+/*         return await axios.get(`downloadResume/${id}/${fileName}`, getConfig(
+            'multipart/form-data',
+        )) */
+    },
 }
