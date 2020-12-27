@@ -60,23 +60,31 @@ export default {
   },
   methods: {
     async refresh() {
-      const {data} = await this.$api.user.findAll(this.password)
-      this.response = data
+      try {
+             const {data} = await this.$api.user.findAll(this.password)
+            this.response = data
+      } catch(e) {
+        this.$message.error('there was an issue while decrypting the data')
+      }
     },
     edit() {
       this.edited = { ...this.firstUser }
       this.editing = true
     },
     async commit(result) {
-      this.editing = false
-      if (this.response.length) {
-        const {data} = await this.$api.user.edit(result, result.password || this.password)
-        console.log('user edited', data)
-      } else {
-        const {data} = await this.$api.user.create(result, result.password || this.password)
-        console.log('user created', data)
+      try {
+            this.editing = false
+            if (this.response.length) {
+              const {data} = await this.$api.user.edit(result, result.password || this.password)
+              console.log('user edited', data)
+            } else {
+              const {data} = await this.$api.user.create(result, result.password || this.password)
+              console.log('user created', data)
+            }
+            this.refresh()
+      } catch (e) {
+        this.$message.error('error while attempting to encrypt data')
       }
-      this.refresh()
     },
     async create() {
       this.edited = {}
