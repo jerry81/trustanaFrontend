@@ -1,12 +1,18 @@
 <template>
   <div id="app">
-    <profile :profile="firstUser" :hasResume="hasResume"/>
-    <el-button 
-      v-if="response.length"
-      class="button" 
-      type="primary" 
-      @click="edit"
-    >Edit Info/编辑</el-button>
+    <div style="display: flex; margin: 10px;">
+      <input placeholder="password" type="password" v-model="password" style="margin-right: 10px; padding: 4px"/>
+      <el-button type="primary" @click="decrypt">Decrypt/揭秘</el-button>
+    </div>
+    <div>
+      <profile :profile="firstUser" :hasResume="hasResume"/>
+      <el-button 
+        v-if="response.length"
+        class="button" 
+        type="primary" 
+        @click="edit"
+      >Edit Info/编辑</el-button>
+    </div>
     <el-button 
       v-if="!response.length"
       class="button" 
@@ -14,10 +20,11 @@
       @click="create"
     >Create User/添加信息</el-button>
     <edit-profile 
-      :visible="editing" 
-      :form="edited"
-      @cancel="editing=false"
-      @submit="commit"
+     :visible="editing" 
+     :form="edited"
+     @cancel="editing=false"
+     @submit="commit"
+     :password="password"
     />
   </div>
 </template>
@@ -35,7 +42,9 @@ export default {
     return {
       response: [],
       editing: false,
-      edited: {}
+      edited: {},
+      password: '',
+      decrypted: false,
     }
   },
   computed: {
@@ -51,7 +60,7 @@ export default {
   },
   methods: {
     async refresh() {
-      const {data} = await this.$api.user.findAll()
+      const {data} = await this.$api.user.findAll(this.password)
       this.response = data
     },
     edit() {
@@ -61,10 +70,10 @@ export default {
     async commit(result) {
       this.editing = false
       if (this.response.length) {
-        const {data} = await this.$api.user.edit(result)
+        const {data} = await this.$api.user.edit(result, result.password || this.password)
         console.log('user edited', data)
       } else {
-        const {data} = await this.$api.user.create(result)
+        const {data} = await this.$api.user.create(result, result.password || this.password)
         console.log('user created', data)
       }
       this.refresh()
@@ -72,7 +81,11 @@ export default {
     async create() {
       this.edited = {}
       this.editing = true
-    }
+    },
+    async decrypt() {
+      this.decrypted = true
+      this.refresh()
+    },
   }
 }
 </script>

@@ -5,6 +5,9 @@
     :visible.sync="visible"
     width="80%">
     <el-form ref="form" :model="form" label-width="240px">
+      <el-form-item label="Password/密码">
+        <el-input type="password" v-model="form.password"></el-input>
+      </el-form-item>
       <el-form-item label="Name/名字">
         <el-input v-model="form.name"></el-input>
       </el-form-item>
@@ -51,6 +54,15 @@ export default {
     form: {
       type: Object,
       default: () => {},
+    },
+    password: {
+      type: String,
+      default: 'default'
+    }
+  },
+  computed: {
+    currentPassword() {
+      return this.form?.password || this.password
     }
   },
   data() {
@@ -63,7 +75,7 @@ export default {
       this.$emit('submit', this.form)
     },
     async onUploadNowClick() {
-      const res = await this.$api.user.upload(this.file)
+      const res = await this.$api.file.upload(this.file, this.currentPassword)
       const data = res?.data
       const { name, insertedId } = data
       this.form.resumeId = insertedId
@@ -81,7 +93,7 @@ export default {
       console.log('args for remove is ', arguments)
     },
     async downloadResume() {
-       const {data} = await this.$api.user.dl(this.form.resumeId, this.form.resumeName)
+       const {data} = await this.$api.file.dl(this.form.resumeId, this.form.resumeName, this.currentPassword)
        const type = MimeTypes.contentType(this.form.resumeName)
        let blob = new Blob([data], {type})
        FileSaver.saveAs(blob, this.form.resumeName)
