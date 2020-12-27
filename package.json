@@ -13,6 +13,7 @@
     "element-ui": "^2.14.1",
     "file-saver": "^2.0.5",
     "mime-types": "^2.1.27",
+    "moment": "^2.29.1",
     "vue": "^2.6.11"
   },
   "devDependencies": {

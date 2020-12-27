@@ -26,17 +26,20 @@
      @submit="commit"
      :password="password"
     />
+    <exercise2 style="margin-top: 50px;"/>
   </div>
 </template>
 
 <script>
 import Profile from './components/Profile'
 import EditProfile from './components/EditProfile'
+import Exercise2 from './components/Exercise2'
 export default {
   name: 'App',
   components: { 
     Profile, 
-    EditProfile 
+    EditProfile,
+    Exercise2
   },
   data: () => {
     return {
