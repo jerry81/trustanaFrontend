@@ -32,3 +32,8 @@ with an empty mongo db, the user has not been created yet and an empty user prof
 2.  click generate token with the options of single use or with an expiration date 
 3.  copy the token url into the reterive string with token box
 4.  the result is displayed (including errors)
+
+### TODO
+
+1.  cypress e2e tests
+2.  deployment (dockerfile, k8s yml)
