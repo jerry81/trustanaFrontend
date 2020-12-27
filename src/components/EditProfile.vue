@@ -38,6 +38,8 @@
 </template>
 
 <script>
+import FileSaver from 'file-saver'
+import MimeTypes from 'mime-types'
 
 export default {
   name: 'App',
@@ -63,9 +65,7 @@ export default {
     async onUploadNowClick() {
       const res = await this.$api.user.upload(this.file)
       const data = res?.data
-      console.log('data is ', data)
       const { name, insertedId } = data
-      console.log('yep', name)
       this.form.resumeId = insertedId
       this.form.resumeName = name
       this.file = null
@@ -81,10 +81,10 @@ export default {
       console.log('args for remove is ', arguments)
     },
     async downloadResume() {
-      const {data} = await this.$api.user.dl(this.form.resumeId, this.form.resumeName)
-      console.log('data is ', data)
-      var url  = window.URL.createObjectURL(data);
-      window.location.assign(url);
+       const {data} = await this.$api.user.dl(this.form.resumeId, this.form.resumeName)
+       const type = MimeTypes.contentType(this.form.resumeName)
+       let blob = new Blob([data], {type})
+       FileSaver.saveAs(blob, this.form.resumeName)
     }
   }
 }
