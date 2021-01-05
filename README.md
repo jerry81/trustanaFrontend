@@ -34,4 +34,4 @@ with an empty mongo db, the user has not been created yet and an empty user prof
 ### TODO
 
 1.  cypress e2e tests
-2.  deployment (dockerfile, k8s yml)
+2.  deployment (dockerfile, k8s yml) UPDATE 1/5 DONE
