@@ -2,7 +2,7 @@
   <div id="ex2" style="padding: 20px; border: 1px solid #ccc;">
     <h2>Exercise 2</h2>
     <div style="margin:10px">
-        <span>Input string/输入的字符串: </span><input v-model="inputString">
+        <span>Input string/输入的字符串: </span><input style="margin-right:10px" v-model="inputString">
         <el-button @click="storeString" type="primary">store string/保存</el-button>
     </div>
     <div style="margin:10px; padding: 10px; border: 1px solid #ddd;">
