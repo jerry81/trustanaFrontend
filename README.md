@@ -12,6 +12,12 @@ step 3: docker-compose up
 
 step 4: open a chrome browser with --disable-web-security flag or safari browser with cross-origin checks disabled and browse to localhost:8080
 
+for tests
+
+step 1: yarn 
+
+step 2: yarn test:e2e
+
 ### user profile explanation
 
 with an empty mongo db, the user has not been created yet and an empty user profile is shown.
@@ -33,5 +39,5 @@ with an empty mongo db, the user has not been created yet and an empty user prof
 
 ### TODO
 
-1.  cypress e2e tests
+1.  cypress e2e tests UPDATE 1/6 DONE
 2.  deployment (dockerfile, k8s yml) UPDATE 1/5 DONE
