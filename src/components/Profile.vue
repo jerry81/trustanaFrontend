@@ -2,10 +2,10 @@
   <div id="profile">
     <h2>User Profile/个人信息</h2>
     <div>
-        <span>Name/名字: </span><span>{{profile.name}}</span>
+        <span>Name/名字: </span><span id="profileNameVal">{{profile.name}}</span>
     </div>
     <div>
-        <span>Email/邮箱: </span><span>{{profile.email}}</span>
+        <span>Email/邮箱: </span><span id="profileEmailVal">{{profile.email}}</span>
     </div>
     <div>
         <span>Resume Filename/简历文件名: </span><span>{{hasResume}}</span>

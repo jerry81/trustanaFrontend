@@ -6,13 +6,13 @@
     width="80%">
     <el-form ref="form" :model="form" label-width="240px">
       <el-form-item label="Password/密码">
-        <el-input type="password" v-model="form.password"></el-input>
+        <el-input id="profile-password" type="password" v-model="form.password"></el-input>
       </el-form-item>
       <el-form-item label="Name/名字">
-        <el-input v-model="form.name"></el-input>
+        <el-input id="profile-name" v-model="form.name"></el-input>
       </el-form-item>
       <el-form-item label="Email/邮箱">
-        <el-input v-model="form.email"></el-input>
+        <el-input id="profile-email" v-model="form.email"></el-input>
       </el-form-item>
       <el-form-item label="Uploaded Resume/已保存简历">
         <span>{{form.resumeName || 'not yet uploaded'}}</span>
@@ -36,7 +36,7 @@
       </el-form-item>
     </el-form>
     <el-button style="margin-top: 10px" class="button" @click="$emit('cancel')">Cancel/取消</el-button>
-    <el-button class="button" type="primary" @click="submit">Submit/提交</el-button>
+    <el-button id="submit-profile" class="button" type="primary" @click="submit">Submit/提交</el-button>
   </el-dialog>
 </template>
 

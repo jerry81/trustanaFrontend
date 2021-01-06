@@ -1,21 +1,21 @@
 <template>
   <div id="app">
     <div style="display: flex; margin: 10px;">
-      <input placeholder="password" type="password" v-model="password" style="margin-right: 10px; padding: 4px"/>
-      <el-button type="primary" @click="decrypt">Decrypt/揭秘</el-button>
+      <input id="home-password" placeholder="password" type="password" v-model="password" style="margin-right: 10px; padding: 4px"/>
+      <el-button id="submit-password" type="primary" @click="decrypt">Decrypt/揭秘</el-button>
     </div>
     <div>
       <profile :profile="firstUser" :hasResume="hasResume"/>
       <el-button 
         v-if="response.length"
-        class="button" 
+        class="profile-button" 
         type="primary" 
         @click="edit"
       >Edit Info/编辑</el-button>
     </div>
     <el-button 
       v-if="!response.length"
-      class="button" 
+      class="profile-button" 
       type="primary" 
       @click="create"
     >Create User/添加信息</el-button>
@@ -108,7 +108,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
-.button {
+.profile-button, button {
   padding: 10px;
   margin-left: 20px;
 }
